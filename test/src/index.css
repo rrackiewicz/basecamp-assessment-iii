@@ -1,0 +1,160 @@
+
+.jumbotron, .matchup {
+  overflow: hidden;
+}
+
+.matchup {
+  border-style: solid;
+  border-color: red;
+}
+
+.center {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.panelWrapper{
+  width: 45%;
+  display: inline-block;
+  border-style: solid;
+  border-width: thin;
+  border-color: #666666;
+  padding: 30px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.imageWrapper {
+  margin: 0;
+  text-align: center;
+  background-color:#E9ECEF;
+  padding: 15px 0 5px 0;
+  color: white;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+.log {
+  width: 45%;
+  padding: 30px;
+  margin-top: 30px;
+}
+
+.level {
+  overflow: hidden;
+  background-color: #999999;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.sign {
+  overflow: hidden;
+}
+
+.wrapper {
+  overflow: hidden;
+}
+
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+}
+
+.healthPanel {
+  padding: 10px;
+  margin: 15px;
+  border-style: solid;
+  border-width: thin;
+  border-color: #666666;
+  color: white;
+  position: relative;
+}
+
+.health {
+  margin: 0;
+  padding: 0;
+  background-color: #2ECC71;
+  height: 25px;
+  width: 100%;
+}
+
+.healthValue {
+  position: absolute;
+  left: 50%;
+  top: 25%;
+  z-index: 1030;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 10% 20% 10% 20% 10% 30%;
+  grid-template-rows: auto auto auto auto;
+}
+
+.gems {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: auto;
+}
+
+.gemsButtons {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: auto;
+}
+
+.gemsWrapper {
+  border-style: solid;
+  border-width: thin;
+  padding-bottom: 15px;
+  margin-top: 10px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.badge {
+  font-size: .9em;
+  font-weight: normal;
+}
+
+.cell {
+  padding: 5px 0px;
+  align-self: center;
+  height: 40px;
+}
+
+.blue, .green, .purple, .red {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+}
+
+.blue {
+  background-color:#5DBFE9;
+}
+
+.red {
+  background-color: #BB212E;
+}
+
+.green {
+  background-color: #89C75E;
+}
+
+.purple {
+  background-color: #BD78B3;
+}
+
+h2 {
+  padding-bottom: 5px;
+  border-bottom: solid;
+  border-width: thin;
+  margin-bottom: 20px;
+}
