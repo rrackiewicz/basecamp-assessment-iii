@@ -4,7 +4,7 @@ class StatsPanel extends React.Component {
 
   render() {  
     return (
-      <div className="stats">
+      <div className="skills">
         <div className="cell"><div className="red"></div></div>
         <div className="cell right">Attack:</div>
         <div className="cell center">{this.props.attack}</div>
@@ -13,7 +13,7 @@ class StatsPanel extends React.Component {
         <div className="cell right">
         {(this.props.context === 'player')
           ?
-            <a class="btn btn-outline-primary btn-sm" href="#" role="button">Attack</a>
+            <a className="btn btn-outline-primary btn-sm" href="#" role="button">Attack</a>
           :
             null }
         </div>
@@ -26,7 +26,7 @@ class StatsPanel extends React.Component {
         <div className="cell right">
         {(this.props.context === 'player')
           ?
-            <a class="btn btn-outline-primary btn-sm" href="#" role="button">Defend</a>
+            <a className="btn btn-outline-primary btn-sm" href="#" role="button">Defend</a>
           :
             null }
         </div>
@@ -39,7 +39,7 @@ class StatsPanel extends React.Component {
         <div className="cell right">
         {(this.props.context === 'player')
           ?
-            <a class="btn btn-outline-primary btn-sm" href="#" role="button">Heal</a>
+            <a className="btn btn-outline-primary btn-sm" href="#" role="button">Heal</a>
           :
             null }
         </div>

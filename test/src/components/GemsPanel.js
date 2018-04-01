@@ -2,6 +2,7 @@ import React from 'react';
 
 class GemsPanel extends React.Component {
 
+  //would like to rebuild this with gem sub-components to reduce boilerplate
   render() {  
     return (
       <div className="gemsWrapper">
@@ -19,7 +20,7 @@ class GemsPanel extends React.Component {
               ? 
                 null
               :
-                <a class="btn btn-outline-primary btn-sm" href="#" role="button">Use</a>
+                <a className="btn btn-outline-primary btn-sm" href="#" role="button">Use</a>
               }
           </div>
           <div className="gcell center">
@@ -27,7 +28,7 @@ class GemsPanel extends React.Component {
               ? 
                 null
               : 
-                <a class="btn btn-outline-primary btn-sm" href="#" role="button">Use</a>
+                <a className="btn btn-outline-primary btn-sm" href="#" role="button">Use</a>
             }
           </div>
           <div className="gcell center">
@@ -35,7 +36,7 @@ class GemsPanel extends React.Component {
               ? 
                 null
               :
-                <a class="btn btn-outline-primary btn-sm" href="#" role="button">Use</a>
+                <a className="btn btn-outline-primary btn-sm" href="#" role="button">Use</a>
             }
           </div>
           <div className="gcell center">
@@ -43,7 +44,7 @@ class GemsPanel extends React.Component {
               ? 
                 null
               :
-                <a class="btn btn-outline-primary btn-sm" href="#" role="button">Use</a>
+                <a className="btn btn-outline-primary btn-sm" href="#" role="button">Use</a>
             }
           </div>
         </div>

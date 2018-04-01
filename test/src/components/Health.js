@@ -4,9 +4,9 @@ class Health extends React.Component {
 
   render() {  
     return (
-      <div className="healthPanel">
-        <div className="health"></div>
-        <div className="healthValue">{this.props.health}</div>
+      <div className="statShroud">
+        <div className="healthBar"></div>
+        <div className="healthValue">{this.props.health} [ {this.props.healthRegen >= 0 ? '+' : null}{this.props.healthRegen} ]</div>
       </div>
     )
   }
