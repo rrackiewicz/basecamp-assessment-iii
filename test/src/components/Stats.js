@@ -2,19 +2,51 @@ import React from 'react';
 
 class Stats extends React.Component {
 
+ /*  manageContext = () => {
+    switch (this.props.context) {
+      case 'header':
+        //return some html;
+      break;
+      case 'base':
+        //return some html;
+      break;
+      case 'weapon':
+        //return some html;
+      break;
+      case 'buff':
+        //return some html;
+      break;
+      case 'debuff':
+       //return some html;
+      break;
+    }
+  } */
+
   render() {  
     return (
-      <div className="wrapperBorder">
-        <div className="stats">
-          <div className="skcell center"><span className="red"></span> ATT PWR</div> 
-          <div className="skcell center"><span className="blue"></span> DEF PWR</div>
-          <div className="skcell center"><span className="green"></span> LUCK</div>
-          <div className="skcell center"><span className="purple"></span> INITIATIVE</div> 
-          <div className="skcell center"><span class="badge badge badge-secondary">{this.props.attack} [ {this.props.attack >= 0 ? '+' : null}{this.props.attackBonus} ]</span></div> 
-          <div className="skcell center"><span class="badge badge badge-secondary">{this.props.defense} [ {this.props.defense >= 0 ? '+' : null}{this.props.defenseBonus} ]</span></div>
-          <div className="skcell center"><span class="badge badge badge-secondary">{this.props.luck} [ {this.props.luck >= 0 ? '+' : null}{this.props.luckBonus} ]</span></div>
-          <div className="skcell center"><span class="badge badge badge-secondary">{this.props.init} [ {this.props.init >= 0 ? '+' : null}{this.props.initBonus} ]</span></div>
-        </div>
+      <div>
+        {this.props.context === 'header' 
+          ?
+          <div className="stats">
+            <div className="stcell center"><span className="red"></span> BASE ATT</div>
+            <div className="stcell center"><span className="blue"></span> BASE DEF</div>
+            <div className="stcell center"><span className="green"></span> BASE LUCK</div>
+            <div className="stcell center"><span className="purple"></span> BASE INIT</div>
+          </div>
+          : null
+        }
+        {this.props.context === 'base' 
+          ?
+          <div className="stats base">
+            <div className="stcell center"><span className="badge statBadge badge-secondary">{this.props.stats.attack}</span></div> 
+            <div className="stcell center"><span className="badge statBadge badge-secondary">{this.props.stats.defense}</span></div>
+            <div className="stcell center"><span className="badge statBadge badge-secondary">{this.props.stats.luck}</span></div>
+            <div className="stcell center"><span className="badge statBadge badge-secondary">{this.props.stats.init}</span></div>
+          </div>
+          : null
+        }
+
+        {/* Stub for additional contexts weapons/armor/buffs/debuffs */}
       </div>
     )
   }

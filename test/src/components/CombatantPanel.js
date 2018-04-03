@@ -4,8 +4,14 @@ import Stats from './Stats';
 import Health from './Health';
 import Action from './Action';
 import Movement from './Movement';
+import Skill from './Skill';
 
 class CombatantPanel extends React.Component {
+  justifyImage = () => {
+    return {
+      textAlign: this.props.context === 'player' ? this.props.pZone.dir : this.props.mZone.dir
+    } 
+  };
 
   render() {  
     return (
@@ -14,21 +20,27 @@ class CombatantPanel extends React.Component {
         style={(this.props.align === 'left') ? {float: 'left'} : {float: 'right'}}
       >
         <Movement 
-          zone = {this.props.zone}
+          pZone = {this.props.pZone}
+          mZone = {this.props.mZone}
+          context = {this.props.context}
         />
-        <div className="imageWrapper rounded">
-          {(this.props.context === 'player') ? 
-                <img src={require(`../images/${this.props.sex}.png`)} alt=""/> 
-              :
-                <img src={require(`../images/${this.props.monster}.png`)} alt=""/>
+        <div 
+          className="imageWrapper rounded"
+          style={this.justifyImage()}
+        >
+          {(this.props.context === 'player') 
+            ? 
+              <img src={require(`../images/${this.props.sex}.png`)} alt=""/> 
+            :
+              <img src={require(`../images/${this.props.monster}.png`)} alt=""/>
           }
           <Health 
-            health = {this.props.health}
-            healthRegen = {this.props.healthRegen}
+            health = {this.props.stats.health}
+            healthRegen = {this.props.stats.healthRegen}
           />
           <Action 
-            action = {this.props.action}
-            actionRegen = {this.props.actionRegen}
+            action = {this.props.stats.action}
+            actionRegen = {this.props.stats.actionRegen}
           />
         </div>
 
@@ -39,16 +51,35 @@ class CombatantPanel extends React.Component {
             <h2 className="display-6">{this.props.monster}</h2>
         }
 
-        <Stats 
-          attack = {this.props.attack}
-          defense = {this.props.defense}
-          luck = {this.props.luck}
-          init = {this.props.init}
-          attackBonus = {this.props.attackBonus}
-          defenseBonus = {this.props.defenseBonus}
-          luckBonus = {this.props.luckBonus}
-          initBonus = {this.props.initBonus}
-        />
+        <div className="wrapperBorder">
+          <Stats 
+            context = 'header'
+          />
+          <Stats 
+            context = 'base'
+            stats = {this.props.stats}
+          />
+          {/* <Stats 
+            context = 'weapon'
+            //need to pass in hands {}. Let stats pull values from enums
+          />
+          <Stats 
+            context = 'buff'
+            //need to pass in buffs []. Filter it for debuffs.
+          />
+          <Stats 
+            context = 'debuff'
+            //need to pass in debuff []. Filter is for debuffs. 
+          /> */}
+        </div>
+        
+        <div className="wrapper">
+          <Skill 
+            skills = {this.props.skills}
+            hands = {this.props.hands}
+            context = {this.props.context}
+          />
+        </div>
 
         <GemsPanel 
           gems = {this.props.gems}

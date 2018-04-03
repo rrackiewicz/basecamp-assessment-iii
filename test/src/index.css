@@ -1,16 +1,14 @@
 
 .jumbotron, .matchup {
+  margin: 0;
+  margin-bottom: 30px;
+  padding: 30px;
   overflow: hidden;
 }
 
 .matchup {
   border-style: solid;
   border-color: red;
-}
-
-.center {
-  text-align: center;
-  padding-top: 10px;
 }
 
 .panelWrapper{
@@ -21,12 +19,17 @@
 .imageWrapper {
   margin: 0;
   margin-top: 10px;
-  text-align: center;
   background-color:#E9ECEF;
   padding: 15px 0 5px 0;
   color: white;
   margin-bottom: 15px;
   overflow: hidden;
+}
+
+.skillWrapper {
+  margin: 0;
+  padding: 0;
+  margin-top: 10px;
 }
 
 .log {
@@ -36,12 +39,12 @@
 }
 
 .level {
+  margin: 0;
   overflow: hidden;
   background-color: #999999;
   color: white;
   padding: 15px;
   text-align: center;
-  font-family: 'Roboto', sans-serif;
 }
 
 .sign {
@@ -57,7 +60,7 @@
   border-style: solid;
   border-width: thin;
   border-color: #666666;
-  font-family: 'Roboto', sans-serif;
+  margin-top: 15px;
 }
 
 .right {
@@ -68,16 +71,12 @@
   text-align: left;
 }
 
-.rfloat {
-  float: right;
-}
-
-.lfloat {
-  float: left;
-}
-
 .center {
   text-align: center;
+}
+
+.gcell {
+  padding-top: 10px;
 }
 
 .statShroud {
@@ -89,6 +88,7 @@
   border-color: #666666;
   color: white;
 }
+
 
 .healthBar {
   margin: 0;
@@ -114,17 +114,70 @@
   z-index: 1030;
 }
 
-.skills {
+.skill {
   display: grid;
-  grid-template-columns: 10% 20% 10% 20% 10% 30%;
-  grid-template-rows: auto auto auto auto;
+  grid-template-columns: 34% 22% 22% 22%;
+  grid-template-rows: 40px;
+  grid-gap: 2px;
+  margin-bottom: 2px;
+}
+
+.damType {
+  display: grid;
+  grid-template-columns: 34% 22% 22% 22%;
+  grid-template-rows: 40px;
+  grid-gap: 2px;
+  margin-bottom: 2px;
+}
+
+.dtcell {
+  background-color: #E9ECEF;
+}
+
+
+.disabled {
+  opacity: .25 !important;
+  border-color: #999999;
+}
+
+.skcell {
+  background-color: #E9ECEF;
+}
+
+.skcell:first-child {
+  border-left: 6px solid orange;
+}
+
+.skcell:nth-child(4), .skcell:nth-child(8) {
+  border-left: 6px solid white;
+}
+
+.dtcell:first-child {
+  border-left: 6px solid white;
+}
+
+.skill > div, .damType > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333333;
+}
+
+.spn2 {
+  grid-column: span 2;
 }
 
 .stats {
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
-  grid-template-rows: auto auto;
-  padding: 10px;
+  grid-template-rows: auto;
+  padding: 0px;
+  padding-top: 10px;
+}
+
+.base {
+  padding-top: 5px;
+  padding-bottom: 10px;
 }
 
 .gems {
@@ -143,13 +196,19 @@
   border-style: solid;
   border-width: thin;
   padding-bottom: 15px;
-  margin-top: 10px;
-  font-family: 'Roboto', sans-serif;
+  margin-top: 15px;
 }
 
-.badge {
+.statBadge {
   font-size: 1.1em;
   padding: 10px;
+  font-weight: normal;
+  background-color: #999999;
+}
+
+.skillBadge, .gemBadge {
+  font-size: 1em;
+  padding: 5px;
   font-weight: normal;
   background-color: #999999;
 }
@@ -158,11 +217,6 @@
   padding: 5px 0px;
   align-self: center;
   height: 40px;
-}
-
-.skcell {
-  padding-top: 0;
-  padding-bottom: 0px;
 }
 
 .blue, .green, .purple, .red {

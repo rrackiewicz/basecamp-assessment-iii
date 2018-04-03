@@ -8,7 +8,7 @@ class Log extends React.Component {
         className="log rounded" 
         style={(this.props.align === 'left') ? {float: 'left'} : {float: 'right'}}
       >
-        <div class="alert alert-success" role="alert">
+        <div className="alert alert-success" role="alert">
           This is a success alert—check it out!
         </div>
       </div>

@@ -13,7 +13,7 @@ export function stateEnum() {
       stat: 'health',
       targetSelf: true, //flag
       val: 10,
-      dur: 1, 
+      dur: 0, 
       hasFalloff: false //flag
     },
     healing: {
@@ -25,19 +25,19 @@ export function stateEnum() {
       hasFalloff: true //flag
     },
     punctured: {
-    name: 'Punctured',
-    stat: 'defense',
-    targetSelf: false, //flag
-    val: 3, //reduces armor by this much
-    dur: 1, 
-    hasFalloff: false //flag
+      name: 'Punctured',
+      stat: 'defense',
+      targetSelf: false, //flag
+      val: 3, 
+      dur: 0, 
+      hasFalloff: false //flag
     },
     shook: {
       name: 'Shaken',
       stat: 'attack',
       targetSelf: false, //flag
-      val: 2, //reduces attack by this much
-      dur: 1, 
+      val: 2, 
+      dur: 0, 
       hasFalloff: false //flag
     },
     maimed: {
@@ -55,202 +55,114 @@ export function stateEnum() {
 export function weaponTypeEnum() {
   const weaponTypes = { 
     knife: {
-      damLevel: 1,
+      attack: 1,
       speed: 'veryFast',
       type: 'pierce',
-      hands: 1,
-      minRange: 1,
-      maxRange: 2,
-      falloff: false
     },
-    daggerpierce: {
-      damLevel: 2,
+    daggerPierce: {
+      attackBonus: 2,
       speed: 'fast',
       type: 'pierce',
-      hands: 1,
-      minRange: 1,
-      maxRange: 1,
-      falloff: false
     },
-    daggerslash: {
-      damLevel: 2,
+    daggerSlash: {
+      attackBonus: 2,
       speed: 'fast',
       type: 'slash',
-      hands: 1,
-      minRange: 1,
-      maxRange: 1,
-      falloff: false
     },
-    swordpierce: {
-      damLevel: 3,
+    swordPierce: {
+      attackBonus: 3,
       speed: 'medium',
       type: 'pierce',
-      hands: 1,
-      minRange: 1,
-      maxRange: 1,
-      falloff: false,
     },
     swordslash: {
-      damLevel: 3,
+      attackBonus: 3,
       speed: 'medium',
       type: 'slash',
-      hands: 1,
-      minRange: 1,
-      maxRange: 1,
-      falloff: false,
     },
-    greatswordpierce: {
-      damLevel: 4,
+    greatswordPierce: {
+      attackBonus: 4,
       speed: 'verySlow',
       type: 'pierce',
-      hands: 2,
-      minRange: 1,
-      maxRange: 1,
-      falloff: false,
     },
-    greatswordslash: {
-      damLevel: 4,
+    greatswordSlash: {
+      attackBonus: 4,
       speed: 'verySlow',
       type: 'slash',
-      hands: 2,
-      minRange: 1,
-      maxRange: 1,
-      falloff: false,
     },
     axe: {
-      damLevel: 4,
+      attackBonus: 4,
       speed: 'slow',
       type: 'slash',
-      hands: 1,
-      minRange: 1,
-      maxRange: 1,
-      falloff: false,
     },
     greataxe: {
-      damLevel: 5,
+      attackBonus: 5,
       speed: 'verySlow',
       type: 'slash',
-      hands: 2,
-      minRange: 1,
-      maxRange: 1,
-      falloff: false,
     },
     axethrow: {
-      damLevel: 3,
+      attackBonus: 3,
       speed: 'fast',
       type: 'slash',
-      hands: 1,
-      minRange: 1,
-      maxRange: 2,
-      falloff: false,
     },
     hammer: {
-      damLevel: 3,
+      attackBonus: 3,
       speed: 'slow',
       type: 'bash',
-      hands: 1,
-      minRange: 1,
-      maxRange: 1,
-      falloff: false,
     },
     greathammer: {
-      damLevel: 4,
+      attackBonus: 4,
       speed: 'verySlow',
       type: 'bash',
-      hands: 2,
-      minRange: 1,
-      maxRange: 1,
-      falloff: false,
     },
     hammerThrow: {
-      damLevel: 2,
+      attackBonus: 2,
       speed: 'fast',
       type: 'slash',
-      hands: 1,
-      minRange: 1,
-      maxRange: 2,
-      falloff: false,
     },
     halberd: {
-      damLevel: 3,
+      attackBonus: 3,
       speed: 'slow',
       type: 'slash',
-      hands: 1,
-      minRange: 1,
-      maxRange: 2,
-      falloff: false,
     },
-    becdecorbin: {
-      damLevel: 3,
+    becDeCorbin: {
+      attackBonus: 3,
       speed: 'slow',
       type: 'bash',
-      hands: 1,
-      minRange: 1,
-      maxRange: 2,
-      falloff: false,
     },
     pike: {
-      damLevel: 3,
+      attackBonus: 3,
       speed: 'slow',
       type: 'pierce',
-      hands: 1,
-      minRange: 1,
-      maxRange: 2,
-      falloff: false,
     },
-    bowpierce: {
-      damLevel: 2,
+    bowPierce: {
+      attackBonus: 2,
       speed: 'slow',
       type: 'pierce',
-      hands: 2,
-      minRange: 2,
-      maxRange: 4,
-      falloff: true,
     },
     bowslash: {
-      damLevel: 2,
+      attackBonus: 2,
       speed: 'slow',
       type: 'slash',
-      hands: 2,
-      minRange: 2,
-      maxRange: 4,
-      falloff: true,
     },
-    bowbash: {
-      damLevel: 2,
+    bowBash: {
+      attackBonus: 2,
       speed: 'slow',
       type: 'bash',
-      hands: 2,
-      minRange: 2,
-      maxRange: 4,
-      falloff: true,
     },
-    crossbowpierce: {
-      damLevel: 3,
+    crossbowPierce: {
+      attackBonus: 3,
       speed: 'verySlow',
       type: 'pierce',
-      hands: 1,
-      minRange: 1,
-      maxRange: 3,
-      falloff: true,
     },
-    crossbowslash: {
-      damLevel: 3,
+    crossbowSlash: {
+      attackBonus: 3,
       speed: 'verySlow',
       type: 'slash',
-      hands: 1,
-      minRange: 1,
-      maxRange: 3,
-      falloff: true,
     },
-    crossbowbash: {
-      damLevel: 3,
+    crossbowBash: {
+      attackBonus: 3,
       speed: 'verySlow',
       type: 'bash',
-      hands: 1,
-      minRange: 1,
-      maxRange: 3,
-      falloff: true,
     }
   }
   return weaponTypes;
@@ -276,6 +188,11 @@ export function statusInitEnum() {
     fast: 3
   }
   return statusInit;
+}
+
+export function zoneEnum() {
+  const zones = ['','left','center','right','left', 'center', 'right'];
+  return zones;
 }
 
 export function weaponSpeedEnum() {

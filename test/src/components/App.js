@@ -4,135 +4,221 @@ import CombatantPanel from './CombatantPanel';
 import Log from './Log';
 import {getName} from '../player';
 import {getMonster} from '../monsters';
-import {compileSkills} from '../player';
-import {stateEnum} from '../enums';
-import {weaponTypeEnum} from '../enums';
-import {armorInitEnum} from '../enums';
-import {weaponSpeedEnum} from '../enums';
-import {armorTypeEnum} from '../enums';
-import {statusInitEnum} from '../enums';
+import {compileSkills} from '../skills';
 
 class App extends React.Component {
   state = {
-    stateEnum: {},
-    weaponTypeEnum: {},
-    armorInitEnum: {},
-    weaponSpeedEnum: {},
-    armorTypeEnum: {},
-    statusInitEnum: {},
-    pActed: false,
-    mActed: false,
-		pDefended: false,
-    mDefended: false,
-    pHitPoits: 0,
-    pBaseHealth: 0,
-    pHealth: 0,
-    pHealthRegen: 0,
-    pAction: 0,
-    pActionRegen: 0,
-    pAttack: 0,
-    pAttackBonus: 0,
-    pDefense: 0,
-    pDefenseBonus: 0,
-    pLuck: 0,
-    pLuckBonus: 0,
-    pInit: 0,
-    pInitBonus: 0,
-    pSpeed: 0,
-    pZone: 0,
-    pHands: {left: '', right: ''},
-    pGems: {red: 0, blue: 0, green: 0, purple: 0},
+    //Player state
+    pStats: {
+      baseHealth: 0,
+      health: 0,
+      healthRegen: 0,
+      action: 0,
+      actionRegen: 0,
+      attack: 0,
+      attackBonus: {
+        left: 0,
+        right: 0,
+        both: 0,
+        tail: 0
+      },
+      defense: 0,
+      defenseBonus: 0,
+      luck: 0,
+      luckBonus: 0,
+      init: 0,
+      initBonus: {
+        left: 0,
+        right: 0,
+        both: 0,
+        tail: 0
+      },
+      speed: 0,
+    },
+    pZone: {
+      zone: 0, 
+      dir: ''
+    },
+    pHands: {
+      left: '', 
+      right: '',
+      both: '',
+      tail: ''
+    },
+    pArmor: '',
+    pGems: {
+      red: 0, 
+      blue: 0, 
+      green: 0, 
+      purple: 0},
     pSkills: [],
     pLog: [],
     pStack: [],
-    mHitPoints: 0,
-    mBaseHealth: 0,
-    mHealth: 0,
-    mHealthRegen: 0,
-    mAction: 0,
-    mActionRegen: 0,
-    mAttack: 0,
-    mAttackBonus: 0,
-    mDefense: 0,
-    mDefenseBonus: 0,
-    mLuck: 0,
-    mLuckBonus: 0,
-    mInit: 0,
-    mInitBonus: 0,
-    mSpeed: 0,
-    mZone: 0,
-    mHands: {left: '', right: ''},
-    mGems: {red: 0, blue: 0, green: 0, purple: 0},
+
+    //Monster state
+    mStats: {
+      baseHealth: 0,
+      health: 0,
+      healthRegen: 0,
+      action: 0,
+      actionRegen: 0,
+      attack: 0,
+      attackBonus: {
+        left: 0,
+        right: 0,
+        both: 0,
+        tail: 0
+      },
+      defense: 0,
+      defenseBonus: 0,
+      luck: 0,
+      luckBonus: 0,
+      init: 0,
+      initBonus: {
+        left: 0,
+        right: 0,
+        both: 0,
+        tail: 0
+      },
+      speed: 0,
+    },
+    mZone: {
+      zone: 0, 
+      dir: ''
+    },
+    mHands: {
+      left: '', 
+      right: '',
+      both: '',
+      tail: ''
+    },
+    mArmor: '',
+    mGems: {
+      red: 0, 
+      blue: 0, 
+      green: 0, 
+      purple: 0
+    },
     mSkills: [],
     mLog: [],
     mStack: [],
+    
+    //Game state
     isNewGame: true,
     whoseTurn: '',
-    level: 0,
+    level: 1,
     name: '',
     player: '',
     monster: '',
-    points: 0
+    points: 0,
+    pActed: false,
+    mActed: false,
+		pDefended: false,
+    mDefended: false
   }
 
   beginGame = () => {
-    const stateEnum = this.stateEnum;
-    const weaponTypeEnum = this.WeaponTypeEnum;
-    const armorInitEnum = this.armorInitEnum;
-    const weaponSpeedEnum = this.weaponSpeedEnum;
-    const armorTypeEnum = this.armorTypeEnum;
-    const statusInitEnum = this.statusInitEnum;
-    const monsters = this.state.monsters;
-    const player = this.state.player;
-    const pSkills = compileSkills();
-    const sex = (Math.floor(Math.random()*2)) ? 'boy' : 'girl';
-    const pGems = {...this.state.pGems}; //clone state 
-    pGems['green'] = 1;
 
-    this.setState({stateEnum});
-    this.setState({weaponTypeEnum});
-    this.setState({armorInitEnum});
-    this.setState({weaponSpeedEnum});
-    this.setState({armorTypeEnum});
-    this.setState({statusInitEnum });
-    this.setState({isNewGame: false});
-    this.setState({pHitPoint: 20});
-    this.setState({pBaseHealth: 20});
-    this.setState({pHealth: 20});
-    this.setState({pHealthRegen: 1});
-    this.setState({pAction: 10});
-    this.setState({pActionRegen: 2});
-    this.setState({pAttack: 5});
-    this.setState({pDefense: 1});
-    this.setState({pLuck: 1});
-    this.setState({pInit: 1});
-    this.setState({pInitBonus: 0});
-    this.setState({pSpeed: 0});
-    this.setState({pZone: 3});
-    this.setState({pHands: {left: '', right: 'Dagger'}});
+    //State temporary variables
+    const player = this.state.player;
+    const skills = compileSkills();
+    const sex = (Math.floor(Math.random()*2)) ? 'boy' : 'girl';
+    
+    //Shallow copies of objects to avoid mutation of state properties
+    const pStats = {...this.state.pStats};
+    const pSkills = [...this.state.pSkills];
+    const pZone = {...this.state.pZone};
+    const pHands = {...this.state.pHands};
+    let pArmor = {...this.state.pArmor};
+    const pGems = {...this.state.pGems};
+
+    //Update Player temporary variables
+    pGems['green'] = 1;
+    pSkills.push({dagger: 1});
+    pZone.zone = 2;
+    pZone.dir = 'center';
+    pHands.right = 'dagger';
+    pArmor = 'flesh';
+    pStats.baseHealth = 20;
+    pStats.health = 20;
+    pStats.healthRegen = 1;
+    pStats.action = 10;
+    pStats.actionRegen = 2;
+    pStats.attack = 5; //base number
+    pStats.defense = 1;
+    pStats.init = 1; //base number
+    pStats.luck = 1;
+    pStats.speed = 1;
+
+    //Player State updates
+    this.setState({pStats});
+    this.setState({pZone});
+    this.setState({pHands});
+    this.setState({pArmor});
     this.setState({pGems});
     this.setState({pSkills});
     this.setState({player: getName(sex)});
     this.setState({sex});
-    this.setState({mHitPoints: 20});
-    this.setState({mBaseHealth: 5});
-    this.setState({mHealth: 5});
-    this.setState({mHealthRegen: 1});
-    this.setState({mAction: 5});
-    this.setState({mActionRegen: 0});
-    this.setState({mAttack: 3});
-    this.setState({mDefense: 1});
-    this.setState({mLuck: 0});
-    this.setState({mInit: 0});
-    this.setState({mInitBonus: 0});
-    this.setState({mSpeed: 0});
-    this.setState({mZone: 4});
-    this.setState({pHands: {left: '', right: 'Claws'}});
-    this.setState({level: 1});
-    this.setState({monster: getMonster(0).name});
 
+    //Game State updates
+    this.setState({level: 1});
+    this.setState({isNewGame: false});
     this.setState({whoseTurn: 'player'})
+
+    this.buildMonster(); //build monster
+    this.calcBonuses(); //generate bonuses *must be done each turn*
   } 
+
+  buildMonster = () => {
+
+    //State temporary variables
+    const monsters = this.state.monsters;
+
+    //Shallow copies of objects to avoid mutation of state properties
+    const mStats = {...this.state.mStats};
+    const mSkills = [...this.state.mSkills];
+    const mZone = {...this.state.mZone};
+    const mHands = {...this.state.mHands};
+    let mArmor = {...this.state.mArmor};
+    const mGems = {...this.state.mGems}; 
+    const level = this.state.level;
+
+    //Update Monster temporary variables
+    getMonster(level).skills.map(e => mSkills.push(e)); //map over monster skills and push to mSkills array
+    mZone.zone = 5;
+    mZone.dir = 'center';
+    mHands.left = getMonster(level).hands.left;
+    mHands.right = getMonster(level).hands.right;
+    mHands.both = getMonster(level).hands.both;
+    mHands.tail = getMonster(level).hands.tail;
+    mArmor = getMonster(level).armor;
+    mStats.health = getMonster(level).stats.health;
+    mStats.healthRegen = getMonster(level).stats.healthRegen;
+    mStats.action = getMonster(level).stats.action;
+    mStats.actionRegen = getMonster(level).stats.actionRegen;
+    mStats.attack = getMonster(level).stats.attack;
+    mStats.defense = getMonster(level).stats.defense;
+    mStats.init = getMonster(level).stats.init;
+    mStats.luck = getMonster(level).stats.luck; 
+    mStats.speed = getMonster(level).stats.speed;
+
+    //Monster State updates
+    this.setState({mStats});
+    this.setState({mZone});
+    this.setState({mHands});
+    this.setState({mArmor});
+    this.setState({mGems});
+    this.setState({mSkills});
+    this.setState({monster: getMonster(level).name});
+  }
+
+  calcBonuses = (context) => {}
+
+  calcInit = (context) => {}
+
+  calcAttack = (context) => {}
+
+  calcDefense = (context) => {}
 
   render() {  
     return (
@@ -144,67 +230,54 @@ class App extends React.Component {
         />
 
         <div className="wrapper">
-          {!this.state.isNewGame ? ( 
+          {!this.state.isNewGame ?  
             <CombatantPanel 
               name = {this.state.name}
               player = {this.state.player}
-              sex = {this.state.sex}
-              attack = {this.state.pAttack}
-              attackBonus = {this.state.pAttackBonus}
-              defense = {this.state.pDefense}
-              defenseBonus = {this.state.pDefenseBonus}
-              luck = {this.state.pLuck}
-              luckBonus = {this.state.pLuckBonus}
-              init = {this.state.pInit}
-              initBonus = {this.state.pInitBonus}
-              speed = {this.state.pSpeed}
-              zone = {this.state.pZone}
+              sex = 'girl'
+              skills = {this.state.pSkills}
+              hands = {this.state.pHands}
+              stats = {this.state.pStats}
+              pZone = {this.state.pZone}
+              mZone = {this.state.mZone}
               gems = {this.state.pGems}
-              health = {this.state.pHealth}
-              healthRegen = {this.state.pHealthRegen}
-              action = {this.state.pAction}
-              actionRegen = {this.state.pActionRegen}
               context = 'player'
               align = 'left'
             />
-          ) : null}
+           : null
+          }
 
-          {!this.state.isNewGame ? ( 
-            <CombatantPanel 
-              monster = {this.state.monster}
-              attack = {this.state.mAttack}
-              attackBonus = {this.state.mAttackBonus}
-              defense = {this.state.mDefense}
-              defenseBonus = {this.state.mDefenseBonus}
-              luck = {this.state.mLuck}
-              luckBonus = {this.state.mLuckBonus}
-              init = {this.state.mInit}
-              initBonus = {this.state.mInitBonus}
-              speed = {this.state.mSpeed}
-              zone = {this.state.mZone}
-              gems = {this.state.mGems}
-              health = {this.state.mHealth}
-              healthRegen = {this.state.mHealthRegen}
-              action = {this.state.mAction}
-              actionRegen = {this.state.mActionRegen}
-              context = 'monster'
-              align = 'right'
-            />
-          ) : null}
+          {!this.state.isNewGame 
+            ?  
+              <CombatantPanel 
+                monster = {this.state.monster}
+                skills = {this.state.mSkills}
+                hands = {this.state.mHands}
+                stats = {this.state.mStats}
+                pZone = {this.state.pZone}
+                mZone = {this.state.mZone}
+                gems = {this.state.mGems}
+                context = 'monster'
+                align = 'right'
+              />
+           : null
+          }
         </div>
 
-        {!this.state.isNewGame ? ( 
-          <div className="wrapper">
-            <Log
-            log = {this.state.pLog}
-            align = 'left'
-            />
-            <Log
-            log = {this.state.mLog}
-            align = 'right'
-            />
-          </div>
-        ) : null}
+        {!this.state.isNewGame 
+          ?  
+            <div className="wrapper">
+              <Log
+              log = {this.state.pLog}
+              align = 'left'
+              />
+              <Log
+              log = {this.state.mLog}
+              align = 'right'
+              />
+            </div>
+          : null
+        }
       </div>
     )
   }

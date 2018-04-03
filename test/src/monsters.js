@@ -1,16 +1,36 @@
-import rando from './helpers.js';
-
 export function getMonster(index) {
   const monster = [
+    {test: 0}, //0 index empty for simplicity
     {
       name: 'jackelope',
-      hands: {left: '', right: 'Claws'},
-      armor: 'none',
-      attack: 3,
-      defense: 1,
-      health: 20,
-      action: 10,
-      init: 1
+      hands: {left: 'claws', right: 'claws', both: '', tail: ''},
+      skills: [{claws: 1}],
+      armor: 'fur',
+      stats: {
+        baseHealth: 10,
+        health: 10, 
+        healthRegen: 0,
+        action: 10,
+        actionRegen: 0, 
+        attack: 3, 
+        attackBonus: {
+          left: 0,
+          right: 0,
+          both: 0,
+          tail: 0
+        },
+        defense: 1, 
+        defenseBonus: 0,
+        init: 1,
+        initBonus: {
+          left: 0,
+          right: 0,
+          both: 0,
+          tail: 0
+        },
+        luck: 0,
+        luckBonus: 0
+      }
     },
     "zombie",
     "mummy",
