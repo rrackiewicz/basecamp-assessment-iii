@@ -5,21 +5,23 @@ class Banner extends React.Component {
   render() {  
     return (
       <div className="wrapper">
-        <div className="jumbotron">
-          <div className = "sign float-left">
-            <h1 className="display-5">Monster Arena Legends</h1>
-            {/* Let's have each word appear in turn using SetTimeout */}
-            <p className="lead">Ready. Set. Die.</p>
-            {/* Let's have this toggle into quit button */}
-            {this.props.isNewGame ? <a onClick={this.props.beginGame} className="btn btn-success btn-lg" href="#" role="button">Begin</a> : null}
-          </div>
-          {!this.props.isNewGame ? (
-          <div className="level float-right rounded">
-            <h1>Level {this.props.level}</h1>
-          </div>
-          ) : null}
+      <div className = "jumbotron">
+        <div className="titles float-left">
+          <h1>Monster Arena Legends</h1>
+          <p>Ready. Set. Die.</p>
+          {this.props.isNewGame ? <a onClick={this.props.beginGame} className="btn btn-success btn-lg" href="#" role="button">Begin</a> : null}
         </div>
+        {!this.props.isNewGame ? (
+          <div className="level float-right rounded">
+            <h1 className="float-left">Level {this.props.level}</h1>
+            <div className="round float-right rounded">
+              <p className="float-left">Round: <span className="badge skillBadge badge-secondary">{this.props.round + ' / 3'}</span></p>
+              <p className="float-left">Turn: <span className="badge skillBadge badge-secondary">{this.props.turn}</span></p>
+            </div>
+          </div>
+        ) : null}
       </div>
+    </div>
     )
   }
 }

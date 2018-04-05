@@ -13,6 +13,12 @@ export function slugify(text) {
     .replace(/-+$/, "");
 }
 
+export function arena(pp, mp) {
+  const graph = ['[', '.', '.', '.', '|', '.', '.', '.', ']'];
+  return graph;
+}
+
+
 export default rando;
 
 

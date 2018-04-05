@@ -1,14 +1,16 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
 
-.jumbotron, .matchup {
-  margin: 0;
-  margin-bottom: 30px;
-  padding: 30px;
+.jumbotron {
   overflow: hidden;
+  padding: 30px;
+  display: flex;
+  align-items: center;
 }
 
 .matchup {
   border-style: solid;
-  border-color: red;
 }
 
 .panelWrapper{
@@ -29,7 +31,6 @@
 .skillWrapper {
   margin: 0;
   padding: 0;
-  margin-top: 10px;
 }
 
 .log {
@@ -39,16 +40,52 @@
 }
 
 .level {
+  display: flex;
+  align-items: center;
   margin: 0;
-  overflow: hidden;
+  padding: 0;
+  padding: 15px;
   background-color: #999999;
   color: white;
-  padding: 15px;
-  text-align: center;
+  height: auto;
+  margin-left: auto;
 }
 
-.sign {
+.level > h1 {
+  margin: 0;
+  padding: 0;
+  padding-right: 15px;
+}
+
+.round > p {
+  margin: 0;
+  padding: 0;
+}
+
+.round > p:first-child {
+  padding-right: 15px;
+}
+
+.round {
+  background-color: white;
+  color: black;
+  font-weight: lighter;
+  margin: 0;
+  padding: 10px;
+}
+
+.titles {
+  width: auto;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
+}
+
+.titles > p  {
+  font-weight: lighter;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 10px;
 }
 
 .wrapper {
@@ -61,14 +98,6 @@
   border-width: thin;
   border-color: #666666;
   margin-top: 15px;
-}
-
-.right {
-  text-align: right;
-}
-
-.left {
-  text-align: left;
 }
 
 .center {
@@ -89,11 +118,10 @@
   color: white;
 }
 
-
 .healthBar {
   margin: 0;
   padding: 0;
-  background-color: #2ECC71;
+  background-color: green;
   height: 22px;
   width: 100%;
 }
@@ -101,7 +129,7 @@
 .actionBar {
   margin: 0;
   padding: 0;
-  background-color: rgb(46, 117, 204);
+  background-color:royalblue;
   height: 22px;
   width: 100%;
 }
@@ -116,19 +144,20 @@
 
 .skill {
   display: grid;
-  grid-template-columns: 34% 22% 22% 22%;
+  grid-template-columns: 28% 24% 24% 24%;
   grid-template-rows: 40px;
   grid-gap: 2px;
   margin-bottom: 2px;
 }
 
-.damType {
+.special {
   display: grid;
-  grid-template-columns: 34% 22% 22% 22%;
-  grid-template-rows: 40px;
+  grid-template-columns: 28% 24% 24% 24%;
+  grid-template-rows: 40px 40px;
   grid-gap: 2px;
   margin-bottom: 2px;
 }
+
 
 .dtcell {
   background-color: #E9ECEF;
@@ -148,15 +177,11 @@
   border-left: 6px solid orange;
 }
 
-.skcell:nth-child(4), .skcell:nth-child(8) {
-  border-left: 6px solid white;
-}
-
 .dtcell:first-child {
   border-left: 6px solid white;
 }
 
-.skill > div, .damType > div {
+.skill > div, .damType > div, .special > div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -165,6 +190,10 @@
 
 .spn2 {
   grid-column: span 2;
+}
+
+.bl6 {
+  border-left: 6px solid white;
 }
 
 .stats {
@@ -182,21 +211,22 @@
 
 .gems {
   display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-columns: 20% 20% 20% 20% 20%;
   grid-template-rows: auto;
 }
 
 .gemsButtons {
   display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-columns: 20% 20% 20% 20% 20%;
   grid-template-rows: auto;
 }
 
 .gemsWrapper {
   border-style: solid;
   border-width: thin;
-  padding-bottom: 15px;
-  margin-top: 15px;
+  padding-bottom: 10px;
+  margin-top: 10px;
+
 }
 
 .statBadge {
@@ -219,11 +249,25 @@
   height: 40px;
 }
 
-.blue, .green, .purple, .red {
+.blue, .green, .purple, .red, .black {
   width: 10px;
   height: 10px;
   border-radius: 10px;
   display: inline-block;
+}
+
+.actionPill {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  background-color:royalblue
+}
+
+.healthPill {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  background-color:green;
 }
 
 .blue {
@@ -240,4 +284,21 @@
 
 .purple {
   background-color: #BD78B3;
+}
+
+.black {
+  background-color: #333333;
+}
+
+
+.shim5 {
+  margin-right: 5px;
+}
+
+h3 {
+  margin: 0;
+  font-size: 1em;
+  margin-top: 10px;
+  margin-bottom: 2px;
+
 }

@@ -50,8 +50,13 @@ class App extends React.Component {
       red: 0, 
       blue: 0, 
       green: 0, 
-      purple: 0},
+      purple: 0,
+      black: 0
+    },
+    pSkillLevels: {},
     pSkills: [],
+    pBuffs: [],
+    pDebuffs: [],
     pLog: [],
     pStack: [],
 
@@ -97,9 +102,13 @@ class App extends React.Component {
       red: 0, 
       blue: 0, 
       green: 0, 
-      purple: 0
+      purple: 0,
+      black: 0
     },
+    mSkillLevels: {},
     mSkills: [],
+    mBuffs: [],
+    mDebuffs: [],
     mLog: [],
     mStack: [],
     
@@ -107,6 +116,8 @@ class App extends React.Component {
     isNewGame: true,
     whoseTurn: '',
     level: 1,
+    round: 0,
+    turn: 0,
     name: '',
     player: '',
     monster: '',
@@ -126,39 +137,51 @@ class App extends React.Component {
     
     //Shallow copies of objects to avoid mutation of state properties
     const pStats = {...this.state.pStats};
-    const pSkills = [...this.state.pSkills];
     const pZone = {...this.state.pZone};
     const pHands = {...this.state.pHands};
     let pArmor = {...this.state.pArmor};
     const pGems = {...this.state.pGems};
-
+    const pSkillLevels = {...this.state.pSkillLevels};
+    const pSkills = [...this.state.pSkills];
+    //const pBuffs = [...this.state.pBuffs];
+    //const pDebuffs = [...this.state.pDebuffs];
+    //const pLog = [...this.state.pLog];
+    //const pStack = [...this.state.pStack];
+    
     //Update Player temporary variables
-    pGems['green'] = 1;
-    pSkills.push({dagger: 1});
-    pZone.zone = 2;
-    pZone.dir = 'center';
-    pHands.right = 'dagger';
-    pArmor = 'flesh';
     pStats.baseHealth = 20;
     pStats.health = 20;
     pStats.healthRegen = 1;
     pStats.action = 10;
     pStats.actionRegen = 2;
-    pStats.attack = 5; //base number
+    pStats.attack = 5;
     pStats.defense = 1;
-    pStats.init = 1; //base number
+    pStats.init = 1; 
     pStats.luck = 1;
     pStats.speed = 1;
-
+    pZone.zone = 2;
+    pZone.dir = 'center';
+    pHands.right = 'dagger';
+    pArmor = 'flesh';
+    pGems['green'] = 1;
+    pSkillLevels.dagger = {level : 1};
+    pSkills.push('heal');
+  
     //Player State updates
     this.setState({pStats});
     this.setState({pZone});
     this.setState({pHands});
     this.setState({pArmor});
     this.setState({pGems});
+    this.setState({pSkillLevels});
     this.setState({pSkills});
+    //this.setState({pBuffs});
+    //this.setState({pDebuffs});
+    //this.setState({pLog});
+    //this.setState({pStack});
     this.setState({player: getName(sex)});
     this.setState({sex});
+
 
     //Game State updates
     this.setState({level: 1});
@@ -176,22 +199,19 @@ class App extends React.Component {
 
     //Shallow copies of objects to avoid mutation of state properties
     const mStats = {...this.state.mStats};
-    const mSkills = [...this.state.mSkills];
     const mZone = {...this.state.mZone};
     const mHands = {...this.state.mHands};
     let mArmor = {...this.state.mArmor};
-    const mGems = {...this.state.mGems}; 
+    //const mGems = {...this.state.mGems}; 
+    let mSkillLevels = {...this.state.mSkillLevels};
+    //const mSkills = [...this.state.mSkills];
+    //const mBuffs = [...this.state.mBuffs];
+    //const mDebuffs = [...this.state.mDebuffs];
+    //const mLog = [...this.state.mLog];
+    //const mStack = [...this.state.mStack];
     const level = this.state.level;
 
     //Update Monster temporary variables
-    getMonster(level).skills.map(e => mSkills.push(e)); //map over monster skills and push to mSkills array
-    mZone.zone = 5;
-    mZone.dir = 'center';
-    mHands.left = getMonster(level).hands.left;
-    mHands.right = getMonster(level).hands.right;
-    mHands.both = getMonster(level).hands.both;
-    mHands.tail = getMonster(level).hands.tail;
-    mArmor = getMonster(level).armor;
     mStats.health = getMonster(level).stats.health;
     mStats.healthRegen = getMonster(level).stats.healthRegen;
     mStats.action = getMonster(level).stats.action;
@@ -201,14 +221,25 @@ class App extends React.Component {
     mStats.init = getMonster(level).stats.init;
     mStats.luck = getMonster(level).stats.luck; 
     mStats.speed = getMonster(level).stats.speed;
+    mZone.zone = 5;
+    mZone.dir = 'center';
+    mHands.left = getMonster(level).hands.left;
+    mHands.right = getMonster(level).hands.right;
+    mHands.both = getMonster(level).hands.both;
+    mHands.tail = getMonster(level).hands.tail;
+    mArmor = getMonster(level).armor;
+    mSkillLevels = getMonster(level).skillLevels;
 
     //Monster State updates
     this.setState({mStats});
     this.setState({mZone});
     this.setState({mHands});
+    //this.setState({mBuffs});
+    //this.setState({mDebuffs});
     this.setState({mArmor});
-    this.setState({mGems});
-    this.setState({mSkills});
+    //this.setState({mGems});
+    this.setState({mSkillLevels});
+    //this.setState({mSkills});
     this.setState({monster: getMonster(level).name});
   }
 
@@ -225,6 +256,8 @@ class App extends React.Component {
       <div className="container">
         <Banner 
           level = {this.state.level}
+          turn = {this.state.turn}
+          round = {this.state.round}
           isNewGame = {this.state.isNewGame}
           beginGame = {this.beginGame}
         />
@@ -236,7 +269,9 @@ class App extends React.Component {
               player = {this.state.player}
               sex = 'girl'
               skills = {this.state.pSkills}
+              skillLevels = {this.state.pSkillLevels}
               hands = {this.state.pHands}
+              armor = {this.state.pArmor}
               stats = {this.state.pStats}
               pZone = {this.state.pZone}
               mZone = {this.state.mZone}
@@ -252,7 +287,9 @@ class App extends React.Component {
               <CombatantPanel 
                 monster = {this.state.monster}
                 skills = {this.state.mSkills}
+                skillLevels = {this.state.mSkillLevels}
                 hands = {this.state.mHands}
+                armor = {this.state.mArmor}
                 stats = {this.state.mStats}
                 pZone = {this.state.pZone}
                 mZone = {this.state.mZone}

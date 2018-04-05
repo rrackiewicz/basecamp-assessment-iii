@@ -1,10 +1,17 @@
 export function getMonster(index) {
   const monster = [
-    {test: 0}, //0 index empty for simplicity
+    {}, //0 index empty so index matches game level
     {
       name: 'jackelope',
       hands: {left: 'claws', right: 'claws', both: '', tail: ''},
-      skills: [{claws: 1}],
+      skillLevels: {
+        claws: {
+          level: 1
+        }
+      },
+      skills: [],
+      buffs: [],
+      debuffs: [],
       armor: 'fur',
       stats: {
         baseHealth: 10,
@@ -29,7 +36,8 @@ export function getMonster(index) {
           tail: 0
         },
         luck: 0,
-        luckBonus: 0
+        luckBonus: 0,
+        speed: 1
       }
     },
     "zombie",

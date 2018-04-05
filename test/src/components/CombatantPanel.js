@@ -75,9 +75,12 @@ class CombatantPanel extends React.Component {
         
         <div className="wrapper">
           <Skill 
-            skills = {this.props.skills}
             hands = {this.props.hands}
             context = {this.props.context}
+            armor = {this.props.armor}
+            skillLevels = {this.props.skillLevels}
+            gems = {this.props.gems}
+            stats = {this.props.stats}
           />
         </div>
 
