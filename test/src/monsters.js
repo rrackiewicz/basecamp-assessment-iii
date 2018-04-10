@@ -3,16 +3,24 @@ export function getMonster(index) {
     {}, //0 index empty so index matches game level
     {
       name: 'jackelope',
-      hands: {left: 'claws', right: 'claws', both: '', tail: ''},
+      hands: [
+        {right: 'claws'},
+        {left: 'claws'}
+      ],
       skillLevels: {
-        claws: {
-          level: 1
-        }
+        weapons: {
+          claws: {
+            level: 1
+          }
+        },
+        armor: {},
+        other: {}
       },
       skills: [],
       buffs: [],
       debuffs: [],
       armor: 'fur',
+      armorSlots: [],
       stats: {
         baseHealth: 10,
         health: 10, 

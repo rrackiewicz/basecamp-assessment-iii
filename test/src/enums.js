@@ -194,12 +194,9 @@ export function armorInitEnum() {
   const armorClasses = { 
     NA: 1,
     light: 0,
-    medium: -1,
+    med: -1,
     heavy: -2,
     ultra: -3,
-    buckler: 0,
-    shield: -1,
-    towerShield: -2
   }
   return armorClasses;
 }
@@ -216,20 +213,6 @@ export function zoneEnum() {
   const zones = ['','left','center','right','left', 'center', 'right'];
   return zones;
 }
-
-export function statColors() {
-  const stats = {
-    health: 'magenta',
-    action: 'cyan',
-    init: 'purple',
-    luck: 'green',
-    att: 'red',
-    def: 'blue'
-  }
-  return stats;
-}
-
-
 
 export function weaponSpeedEnum() {
   const weaponSpeeds = {

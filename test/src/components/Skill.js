@@ -66,7 +66,7 @@ getStat = (stat) => {
                   ?
                   <div>
                     {skills[right].weaponType.map(e =>
-                      <a className="btn btn-outline-primary btn-sm shim5" href="#" role="button" key={e}>{weaponType[e].type}</a>
+                      <a className="btn btn-outline-primary btn-sm shimr5" href="#" role="button" key={e}>{weaponType[e].type}</a>
                     )}
                   </div>
                   : null
@@ -100,7 +100,7 @@ getStat = (stat) => {
                   ?
                   <div>
                     {skills[left].weaponType.map(e =>
-                      <a className="btn btn-outline-primary btn-sm shim5" href="#" role="button" key={e}>{weaponType[e].type}</a>
+                      <a className="btn btn-outline-primary btn-sm shimr5" href="#" role="button" key={e}>{weaponType[e].type}</a>
                     )}
                   </div>
                   : null
@@ -133,7 +133,7 @@ getStat = (stat) => {
               ?
               <div>
                 {skills[right].special.map(e =>
-                  <a className="btn btn-outline-primary btn-sm shim5" href="#" role="button" key={e}>{Object.values(e)}</a>
+                  <a className="btn btn-outline-primary btn-sm shimr5" href="#" role="button" key={e}>{Object.values(e)}</a>
                 )}
               </div>
               : null

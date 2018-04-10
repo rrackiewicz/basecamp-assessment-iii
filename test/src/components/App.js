@@ -4,7 +4,6 @@ import CombatantPanel from './CombatantPanel';
 import Log from './Log';
 import {getName} from '../player';
 import {getMonster} from '../monsters';
-import {compileSkills} from '../skills';
 
 class App extends React.Component {
   state = {
@@ -39,13 +38,9 @@ class App extends React.Component {
       zone: 0, 
       dir: ''
     },
-    pHands: {
-      left: '', 
-      right: '',
-      both: '',
-      tail: ''
-    },
+    pHands: [],
     pArmor: '',
+    pArmorSlots: [],
     pGems: {
       red: 0, 
       blue: 0, 
@@ -53,7 +48,11 @@ class App extends React.Component {
       purple: 0,
       black: 0
     },
-    pSkillLevels: {},
+    pSkillLevels: {
+      weapons: {},
+      armor: {},
+      other: {}
+    },
     pSkills: [],
     pBuffs: [],
     pDebuffs: [],
@@ -91,13 +90,9 @@ class App extends React.Component {
       zone: 0, 
       dir: ''
     },
-    mHands: {
-      left: '', 
-      right: '',
-      both: '',
-      tail: ''
-    },
+    mHands: [],
     mArmor: '',
+    mArmorSlots: [],
     mGems: {
       red: 0, 
       blue: 0, 
@@ -105,7 +100,11 @@ class App extends React.Component {
       purple: 0,
       black: 0
     },
-    mSkillLevels: {},
+    mSkillLevels: {
+      weapons: {},
+      armor: {},
+      other: {}
+    },
     mSkills: [],
     mBuffs: [],
     mDebuffs: [],
@@ -118,7 +117,6 @@ class App extends React.Component {
     level: 1,
     round: 0,
     turn: 0,
-    name: '',
     player: '',
     monster: '',
     points: 0,
@@ -131,14 +129,12 @@ class App extends React.Component {
   beginGame = () => {
 
     //State temporary variables
-    const player = this.state.player;
-    const skills = compileSkills();
     const sex = (Math.floor(Math.random()*2)) ? 'boy' : 'girl';
     
     //Shallow copies of objects to avoid mutation of state properties
     const pStats = {...this.state.pStats};
     const pZone = {...this.state.pZone};
-    const pHands = {...this.state.pHands};
+    const pHands = [...this.state.pHands];
     let pArmor = {...this.state.pArmor};
     const pGems = {...this.state.pGems};
     const pSkillLevels = {...this.state.pSkillLevels};
@@ -161,10 +157,10 @@ class App extends React.Component {
     pStats.speed = 1;
     pZone.zone = 2;
     pZone.dir = 'center';
-    pHands.right = 'dagger';
-    pArmor = 'flesh';
+    pHands.push({right: 'dagger'});
+    pArmor = 'cloth';
     pGems['green'] = 1;
-    pSkillLevels.dagger = {level : 1};
+    pSkillLevels.weapons.dagger = {level : 1};
     pSkills.push('heal');
   
     //Player State updates
@@ -194,14 +190,12 @@ class App extends React.Component {
 
   buildMonster = () => {
 
-    //State temporary variables
-    const monsters = this.state.monsters;
-
     //Shallow copies of objects to avoid mutation of state properties
     const mStats = {...this.state.mStats};
     const mZone = {...this.state.mZone};
-    const mHands = {...this.state.mHands};
+    let mHands = [...this.state.mHands];
     let mArmor = {...this.state.mArmor};
+    let mArmorSlots = [ ...this.state.mArmorSlots]
     //const mGems = {...this.state.mGems}; 
     let mSkillLevels = {...this.state.mSkillLevels};
     //const mSkills = [...this.state.mSkills];
@@ -223,11 +217,9 @@ class App extends React.Component {
     mStats.speed = getMonster(level).stats.speed;
     mZone.zone = 5;
     mZone.dir = 'center';
-    mHands.left = getMonster(level).hands.left;
-    mHands.right = getMonster(level).hands.right;
-    mHands.both = getMonster(level).hands.both;
-    mHands.tail = getMonster(level).hands.tail;
+    mHands = getMonster(level).hands;
     mArmor = getMonster(level).armor;
+    mArmorSlots = getMonster(level).armorSlots;
     mSkillLevels = getMonster(level).skillLevels;
 
     //Monster State updates
@@ -237,6 +229,7 @@ class App extends React.Component {
     //this.setState({mBuffs});
     //this.setState({mDebuffs});
     this.setState({mArmor});
+    this.setState({mArmorSlots});
     //this.setState({mGems});
     this.setState({mSkillLevels});
     //this.setState({mSkills});
@@ -265,13 +258,13 @@ class App extends React.Component {
         <div className="wrapper">
           {!this.state.isNewGame ?  
             <CombatantPanel 
-              name = {this.state.name}
               player = {this.state.player}
-              sex = 'girl'
+              sex = {this.state.sex}
               skills = {this.state.pSkills}
               skillLevels = {this.state.pSkillLevels}
               hands = {this.state.pHands}
               armor = {this.state.pArmor}
+              armorSlots = {this.state.pArmorSlots}
               stats = {this.state.pStats}
               pZone = {this.state.pZone}
               mZone = {this.state.mZone}
@@ -290,6 +283,7 @@ class App extends React.Component {
                 skillLevels = {this.state.mSkillLevels}
                 hands = {this.state.mHands}
                 armor = {this.state.mArmor}
+                armorSlots = {this.state.mArmorSlots}
                 stats = {this.state.mStats}
                 pZone = {this.state.pZone}
                 mZone = {this.state.mZone}

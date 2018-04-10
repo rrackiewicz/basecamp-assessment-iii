@@ -123,11 +123,12 @@ export function otherSkillEnum() {
 
 export function armorSkillEnum() {
   const skills = {
-    flesh : {
-      skillName: 'Flesh',
+    cloth : {
+      skillName: 'Cloth',
       skillType: 'armor',
       purchaseCost: 0,
       def: 0,
+      slots: 0,
       weight: 'NA'
     },
     fur: {
@@ -135,6 +136,7 @@ export function armorSkillEnum() {
       skillType: 'armor',
       purchaseCost: 10,
       def: 1,
+      slots: 1,
       weight: 'light'
     },    
     padded : {
@@ -142,6 +144,7 @@ export function armorSkillEnum() {
       skillType: 'armor',
       purchaseCost: 20,
       def: 2,
+      slots: 1,
       weight: 'light'
     },    
     leather:{
@@ -149,6 +152,7 @@ export function armorSkillEnum() {
       skillType: 'armor',
       purchaseCost: 30,
       def: 3,
+      slots: 1,
       weight: 'light'
     },    
     studded: {
@@ -156,6 +160,7 @@ export function armorSkillEnum() {
       skillType: 'armor',
       purchaseCost: 40,
       def: 4,
+      slots: 1,
       weight: 'light'
     },    
     hide:{
@@ -163,34 +168,39 @@ export function armorSkillEnum() {
       skillType: 'armor',
       purchaseCost: 50,
       def: 5,
-      weight: 'medium'
+      slots: 2,
+      weight: 'med'
     },
     bone: {
       skillName: 'Animal Bone',
       skillType: 'armor',
       purchaseCost: 60,
       def: 6,
-      weight: 'medium'
+      slots: 2,
+      weight: 'med'
     },   
     scale:{
       skillName: 'Animal Scale',
       skillType: 'armor',
       purchaseCost: 70,
       def: 7,
-      weight: 'medium'
+      slots: 2,
+      weight: 'med'
     },    
     chainmail: {
       skillName: 'Chain Mail',
       skillType: 'armor',
       purchaseCost: 80,
       def: 8,
-      weight: 'medium'
+      slots: 2,
+      weight: 'med'
     },    
     banded:{
       skillName: 'Banded',
       skillType: 'armor',
       purchaseCost: 90,
       def: 9,
+      slots: 3,
       weight: 'heavy'
     },    
     chitin:{
@@ -198,6 +208,7 @@ export function armorSkillEnum() {
       skillType: 'armor',
       purchaseCost: 100,
       def: 10,
+      slots: 3,
       weight: 'heavy'
     },    
     platemail:{
@@ -205,6 +216,7 @@ export function armorSkillEnum() {
       skillType: 'armor',
       purchaseCost: 110,
       def: 11,
+      slots: 3,
       weight: 'heavy'
     },    
     rock:{
@@ -212,6 +224,7 @@ export function armorSkillEnum() {
       skillType: 'armor',
       purchaseCost: 115,
       def: 12,
+      slots: 3,
       weight: 'heavy'
     },    
     dragonscale: {
@@ -219,6 +232,7 @@ export function armorSkillEnum() {
       skillType: 'armor',
       purchaseCost: 120,
       def: 13,
+      slots: 4,
       weight: 'ultra'
     }, 
     buckler: {
@@ -226,6 +240,7 @@ export function armorSkillEnum() {
       skillType: 'armor',
       purchaseCost: 20,
       def: 2,
+      slots: 1,
       weight: 'light'
     },
     shield: {
@@ -233,14 +248,24 @@ export function armorSkillEnum() {
       skillType: 'armor',
       purchaseCost: 30,
       def: 3,
-      weight: 'light'
+      slots: 2,
+      weight: 'med'
     },
     towerShield: {
       skillName: 'Tower Shield',
       skillType: 'armor',
       purchaseCost: 40,
       def: 4,
-      weight: 'light'
+      slots: 3,
+      weight: 'heavy'
+    }, 
+    dragonScaleShield : {
+      skillName: 'Dragon Scale Shield',
+      skillType: 'armor',
+      purchaseCost: 50,
+      def: 5,
+      slots: 4,
+      weight: 'ultra'
     }
   }   
   return skills;

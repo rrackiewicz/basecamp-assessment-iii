@@ -1,10 +1,12 @@
 import React from 'react';
-import GemsPanel from './GemsPanel';
+import Gems from './Gems';
 import Stats from './Stats';
 import Health from './Health';
 import Action from './Action';
 import Movement from './Movement';
-import Skill from './Skill';
+import WeaponSkill from './WeaponSkill';
+import ArmorSkill from './ArmorSkill';
+import SpecialSkill from './SpecialSkill';
 
 class CombatantPanel extends React.Component {
   justifyImage = () => {
@@ -59,35 +61,40 @@ class CombatantPanel extends React.Component {
             context = 'base'
             stats = {this.props.stats}
           />
-          {/* <Stats 
-            context = 'weapon'
-            //need to pass in hands {}. Let stats pull values from enums
-          />
-          <Stats 
-            context = 'buff'
-            //need to pass in buffs []. Filter it for debuffs.
-          />
-          <Stats 
-            context = 'debuff'
-            //need to pass in debuff []. Filter is for debuffs. 
-          /> */}
         </div>
         
-        <div className="wrapper">
-          <Skill 
-            hands = {this.props.hands}
+        {this.props.hands.map((e,i) => 
+          <WeaponSkill 
+            hands = {e}
             context = {this.props.context}
-            armor = {this.props.armor}
-            skillLevels = {this.props.skillLevels}
-            gems = {this.props.gems}
-            stats = {this.props.stats}
+            weaponLevels = {this.props.skillLevels.weapons}
+            key = {i}
+            action = {this.props.stats.action}
           />
-        </div>
+        )}
 
-        <GemsPanel 
-          gems = {this.props.gems}
-          context = {this.props.context}
+        {this.props.hands.map((e,i) =>
+          <SpecialSkill
+            hands = {e}
+            context = {this.props.context}
+            weaponLevels = {this.props.skillLevels.weapons}
+            key = {i} 
+          />
+        )}
+
+        <ArmorSkill 
+          armor = {this.props.armor}
+          armorSlot = {this.props.armorSlots}
         />
+
+        <div className="gemWrapper">
+          {Object.keys(this.props.gems).map(f =>
+            <Gems 
+              gem = {{[f]:this.props.gems[f]}} //es6 feature...what is it called?
+              context = {this.props.context}
+            key={f}/>
+          )}
+        </div>
       </div>
     )
   }

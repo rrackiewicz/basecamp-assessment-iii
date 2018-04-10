@@ -9,7 +9,7 @@ class Banner extends React.Component {
         <div className="titles float-left">
           <h1>Monster Arena Legends</h1>
           <p>Ready. Set. Die.</p>
-          {this.props.isNewGame ? <a onClick={this.props.beginGame} className="btn btn-success btn-lg" href="#" role="button">Begin</a> : null}
+          {this.props.isNewGame ? <button onClick={this.props.beginGame} className="btn btn-success btn-lg" >Begin</button> : null}
         </div>
         {!this.props.isNewGame ? (
           <div className="level float-right rounded">

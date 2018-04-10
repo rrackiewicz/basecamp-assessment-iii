@@ -105,7 +105,6 @@ body {
 }
 
 .gcell {
-  padding-top: 10px;
 }
 
 .statShroud {
@@ -144,7 +143,7 @@ body {
 
 .skill {
   display: grid;
-  grid-template-columns: 28% 24% 24% 24%;
+  grid-template-columns: 37% 21% 21% 21%;
   grid-template-rows: 40px;
   grid-gap: 2px;
   margin-bottom: 2px;
@@ -152,7 +151,7 @@ body {
 
 .special {
   display: grid;
-  grid-template-columns: 28% 24% 24% 24%;
+  grid-template-columns: 37% 21% 21% 21%;
   grid-template-rows: 40px 40px;
   grid-gap: 2px;
   margin-bottom: 2px;
@@ -174,14 +173,14 @@ body {
 }
 
 .skcell:first-child {
-  border-left: 6px solid orange;
+  border-left: 6px solid #333333;
 }
 
 .dtcell:first-child {
   border-left: 6px solid white;
 }
 
-.skill > div, .damType > div, .special > div {
+.skill > div, .damType > div, .special > div, .gem > div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -209,10 +208,26 @@ body {
   padding-bottom: 10px;
 }
 
-.gems {
+.noButton {   
+  margin-top: 28px;
+}
+
+.gemWrapper {
   display: grid;
   grid-template-columns: 20% 20% 20% 20% 20%;
   grid-template-rows: auto;
+  border-style: solid;
+  border-width: thin;
+  border-color: #666666;
+  margin-top: 15px;
+}
+
+.gem {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: auto;
+  padding-top: 0\5px;
+  padding-bottom: 10px;
 }
 
 .gemsButtons {
@@ -229,18 +244,20 @@ body {
 
 }
 
-.statBadge {
-  font-size: 1.1em;
-  padding: 10px;
-  font-weight: normal;
+.badge {
+  color: white;
+  font-weight: lighter;
   background-color: #999999;
 }
 
-.skillBadge, .gemBadge {
+.lrgBadge {
+  font-size: 1.5em;
+  padding: 10px;
+}
+
+.smlBadge {
   font-size: 1em;
   padding: 5px;
-  font-weight: normal;
-  background-color: #999999;
 }
 
 .cell {
@@ -249,40 +266,34 @@ body {
   height: 40px;
 }
 
-.blue, .green, .purple, .red, .black {
+.pill {
   width: 10px;
   height: 10px;
   border-radius: 10px;
   display: inline-block;
 }
 
-.actionPill {
-  width: 10px;
-  height: 10px;
-  display: inline-block;
-  background-color:royalblue
+.health {
+  background-color: teal;
 }
 
-.healthPill {
-  width: 10px;
-  height: 10px;
-  display: inline-block;
-  background-color:green;
+.act {
+  background-color: darkorange;
 }
 
-.blue {
+.def {
   background-color:#5DBFE9;
 }
 
-.red {
+.att {
   background-color: #BB212E;
 }
 
-.green {
+.luck {
   background-color: #89C75E;
 }
 
-.purple {
+.init {
   background-color: #BD78B3;
 }
 
@@ -290,15 +301,22 @@ body {
   background-color: #333333;
 }
 
-
-.shim5 {
+.shimr5 {
   margin-right: 5px;
 }
+
+.shiml5 {
+  margin-left: 5px;
+}
+
+.shimr5 {
+  margin-top: 5px;
+}
+
 
 h3 {
   margin: 0;
   font-size: 1em;
   margin-top: 10px;
   margin-bottom: 2px;
-
 }
