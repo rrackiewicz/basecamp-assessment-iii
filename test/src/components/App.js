@@ -1,9 +1,11 @@
 import React from 'react';
 import Banner from './Banner';
 import CombatantPanel from './CombatantPanel';
-import Log from './Log';
 import {getName} from '../player';
 import {getMonster} from '../monsters';
+import {randn} from '../helpers';
+import {weaponTypeEnum} from '../enums';
+import {armorSkillEnum} from '../skills';
 
 class App extends React.Component {
   state = {
@@ -40,12 +42,13 @@ class App extends React.Component {
     },
     pHands: [],
     pArmor: '',
-    pArmorSlots: [],
+    pArmorSlots: [
+    ],
     pGems: {
-      red: 0, 
-      blue: 0, 
-      green: 0, 
-      purple: 0,
+      att: 0, 
+      def: 0, 
+      luck: 0, 
+      init: 0,
       black: 0
     },
     pSkillLevels: {
@@ -57,7 +60,7 @@ class App extends React.Component {
     pBuffs: [],
     pDebuffs: [],
     pLog: [],
-    pStack: [],
+    pQue: [],
 
     //Monster state
     mStats: {
@@ -94,10 +97,10 @@ class App extends React.Component {
     mArmor: '',
     mArmorSlots: [],
     mGems: {
-      red: 0, 
-      blue: 0, 
-      green: 0, 
-      purple: 0,
+      att: 0, 
+      def: 0, 
+      luck: 0, 
+      init: 0,
       black: 0
     },
     mSkillLevels: {
@@ -159,33 +162,34 @@ class App extends React.Component {
     pZone.dir = 'center';
     pHands.push({right: 'dagger'});
     pArmor = 'cloth';
-    pGems['green'] = 1;
+    pGems['luck'] = 1;
+    pGems['black'] = 2;
+    pGems['def'] = 0;
     pSkillLevels.weapons.dagger = {level : 1};
     pSkills.push('heal');
   
     //Player State updates
-    this.setState({pStats});
-    this.setState({pZone});
-    this.setState({pHands});
-    this.setState({pArmor});
-    this.setState({pGems});
-    this.setState({pSkillLevels});
-    this.setState({pSkills});
-    //this.setState({pBuffs});
-    //this.setState({pDebuffs});
-    //this.setState({pLog});
-    //this.setState({pStack});
-    this.setState({player: getName(sex)});
-    this.setState({sex});
-
-
+    this.setState({
+      pStats, 
+      pZone,
+      pHands,
+      pArmor,
+      pGems,
+      pSkillLevels,
+      pSkills,
+      player: getName(sex),
+      sex
+    });
+   
     //Game State updates
-    this.setState({level: 1});
-    this.setState({isNewGame: false});
-    this.setState({whoseTurn: 'player'})
+    this.setState({
+      level: 1,
+      isNewGame: false,
+      whoseTurn: 'player'
+    });
 
     this.buildMonster(); //build monster
-    this.calcBonuses(); //generate bonuses *must be done each turn*
+    //this.calcBonuses(); //generate bonuses *must be done each turn*
   } 
 
   buildMonster = () => {
@@ -222,27 +226,118 @@ class App extends React.Component {
     mArmorSlots = getMonster(level).armorSlots;
     mSkillLevels = getMonster(level).skillLevels;
 
-    //Monster State updates
-    this.setState({mStats});
-    this.setState({mZone});
-    this.setState({mHands});
-    //this.setState({mBuffs});
-    //this.setState({mDebuffs});
-    this.setState({mArmor});
-    this.setState({mArmorSlots});
-    //this.setState({mGems});
-    this.setState({mSkillLevels});
-    //this.setState({mSkills});
-    this.setState({monster: getMonster(level).name});
+    //Monster State updates. By calling setState once we are batching
+    this.setState({
+      mStats,
+      mZone,
+      mHands,
+      mArmor,
+      mArmorSlots,
+      mSkillLevels,
+      monster: getMonster(level).name
+    });
   }
 
-  calcBonuses = (context) => {}
+  playerActions = (payload) => {
+    //player CLICKS on action triggers this function callback
+    //calcBonuses(payload, context) store in bonuses variables
+    //call attackAction for attack action
+    //call specialAction for special action
+    //call moveAction for movement action
+    //call armorAction for gem armor action
+    //call gemAction for pop gem action
+    //call monsterActions
+  }
+  monsterActions = (payload) => {
+    //calcBonuses(payload, context). store in bonuses variables{}
+    //call monsterAI to determine monsters choices 
+    //call baseAttack for attack action
+    //call specialAttack for special action
+    //call moveAction for movement action
+    //call gemArmor for gem armor action
+    //call popGem for pop gem action
+    //send payload to manageBattle()
+  }
+
+  manageBattle = (payload, context) => {
+    //payload is the action selected by each participant
+    //payload: {player: '', monster: ''}
+    
+    // apply players buffs to state (we couldn't change these until monster chose their action)
+    // determine if gem is produced for either player. How are we going to pass this info in?
+    // DISPLAY initiative results
+    // DISPLAY alerts regarding each players action, costs are applied as per alert (need an animation)
+    // DISPLAY fight button. 
+    // Player CLICKS on fight button. 
+    // DISPLAY alerts to reflect outcome of action (movement, attack, special, pop gem, upgrade armor)
+    // Status added to status que
+    // DISPLAY next round button
+    // PLAYER CLICKS on new round butotn.
+    // Reset buffed stats based on status que
+    // check for end of game
+    // regen health and action
+
+  }
+
+  calcBonuses = (payload, context) => {
+    const pStats = {...this.state.pStats};
+    const mStats = {...this.state.mStats};
+    const weaponType = weaponTypeEnum();
+    const armorSkill = armorSkillEnum();
+    //att bonus for attacker, def bonus for 
+    if (context === 'player') {
+      pStats.attack += weaponType[payload].att;
+      mStats.defense += armorSkill[this.state.mArmor].def;
+    } else { 
+      mStats.attack += weaponType[payload].att;
+      pStats.defense += armorSkill[this.state.pArmor].def
+    } //don't forget to lower these stats
+    //I think a better system would be to implement a que
+    //Filter attack values then reduce down to an attack bonus
+    //Each turn manage the que by removing expired buffs
+    //[{attack: {val: 3}, {dur: 1}}]
+    //The only time state is updated is for changes to leveling up skills
+    //Remove bonuses from all stats and calc dynamically
+
+    console.log(pStats.attack, mStats.defense)
+    this.setState({pStats})
+    this.setState({mStats})
+    
+    //add armor gems buffs to stats NOT IMPLEMENTED
+  }
+
 
   calcInit = (context) => {}
 
-  calcAttack = (context) => {}
+  baseAttack = (payload, context) => {
+    this.calcBonuses(payload, context)
+    let attackRoll = 0;
+    let defenseRoll = 0;
+    context === 'player' ? attackRoll = randn(this.state.pStats.attack) : attackRoll = randn(this.state.mStats.attack);
+    defenseRoll = context === 'player' ? randn(this.state.mStats.defense) : randn(this.state.pStats.defense);
+ 
+  }
 
-  calcDefense = (context) => {}
+  specialAttack = (payload) => {
+    //add effect to status[]
+  }
+
+  isGameOver = () => {}
+
+  resetGame = () => {}
+
+  updateStats = () => {
+    //from att bonus from attacker and def bonus from defender
+    //isGameOver()
+  }
+
+  updateRange = () => {
+    //at the end of every round calculate range and pass via props
+  }
+
+  upgradeArmor = (context) => {
+    //check to see if slots need to be reset and increased
+  }
 
   render() {  
     return (
@@ -255,8 +350,8 @@ class App extends React.Component {
           beginGame = {this.beginGame}
         />
 
-        <div className="wrapper">
-          {!this.state.isNewGame ?  
+        {!this.state.isNewGame ?
+          <div className="wrapper">
             <CombatantPanel 
               player = {this.state.player}
               sex = {this.state.sex}
@@ -271,44 +366,30 @@ class App extends React.Component {
               gems = {this.state.pGems}
               context = 'player'
               align = 'left'
-            />
-           : null
-          }
-
-          {!this.state.isNewGame 
-            ?  
-              <CombatantPanel 
-                monster = {this.state.monster}
-                skills = {this.state.mSkills}
-                skillLevels = {this.state.mSkillLevels}
-                hands = {this.state.mHands}
-                armor = {this.state.mArmor}
-                armorSlots = {this.state.mArmorSlots}
-                stats = {this.state.mStats}
-                pZone = {this.state.pZone}
-                mZone = {this.state.mZone}
-                gems = {this.state.mGems}
-                context = 'monster'
-                align = 'right'
-              />
-           : null
-          }
-        </div>
-
-        {!this.state.isNewGame 
-          ?  
-            <div className="wrapper">
-              <Log
+              baseAttack = {this.baseAttack}
+              specialAttack = {this.specialAttack}
               log = {this.state.pLog}
-              align = 'left'
-              />
-              <Log
-              log = {this.state.mLog}
+              //mType = {this.state.messageType}
+            />
+
+            <CombatantPanel 
+              monster = {this.state.monster}
+              skills = {this.state.mSkills}
+              skillLevels = {this.state.mSkillLevels}
+              hands = {this.state.mHands}
+              armor = {this.state.mArmor}
+              armorSlots = {this.state.mArmorSlots}
+              stats = {this.state.mStats}
+              pZone = {this.state.pZone}
+              mZone = {this.state.mZone}
+              gems = {this.state.mGems}
+              context = 'monster'
               align = 'right'
-              />
-            </div>
-          : null
-        }
+              log = {this.state.mLog}
+            />
+          </div>
+        : null 
+        } 
       </div>
     )
   }

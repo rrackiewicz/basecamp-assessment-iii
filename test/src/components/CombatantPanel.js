@@ -7,6 +7,7 @@ import Movement from './Movement';
 import WeaponSkill from './WeaponSkill';
 import ArmorSkill from './ArmorSkill';
 import SpecialSkill from './SpecialSkill';
+import Log from './Log';
 
 class CombatantPanel extends React.Component {
   justifyImage = () => {
@@ -21,16 +22,18 @@ class CombatantPanel extends React.Component {
         className="panelWrapper wrapperBorder rounded"
         style={(this.props.align === 'left') ? {float: 'left'} : {float: 'right'}}
       >
-        <Movement 
-          pZone = {this.props.pZone}
-          mZone = {this.props.mZone}
-          context = {this.props.context}
+ 
+        <Log
+          log = {this.props.log}
+          message = {this.props.message}
+          mType = {this.props.m}
         />
+
         <div 
           className="imageWrapper rounded"
           style={this.justifyImage()}
         >
-          {(this.props.context === 'player') 
+          {this.props.context === 'player' 
             ? 
               <img src={require(`../images/${this.props.sex}.png`)} alt=""/> 
             :
@@ -46,9 +49,16 @@ class CombatantPanel extends React.Component {
           />
         </div>
 
-        {(this.props.context === 'player')
+        {this.props.context === 'player'
           ?
-            <h2 className="display-6">{this.props.player}</h2>
+            <div className = "nameWrapper">
+              <h2 className="display-6 float-left">{this.props.player}</h2>
+              <Movement 
+                pZone = {this.props.pZone}
+                mZone = {this.props.mZone}
+                context = {this.props.context}
+              />
+            </div>
           :
             <h2 className="display-6">{this.props.monster}</h2>
         }
@@ -70,6 +80,7 @@ class CombatantPanel extends React.Component {
             weaponLevels = {this.props.skillLevels.weapons}
             key = {i}
             action = {this.props.stats.action}
+            baseAttack = {this.props.baseAttack}
           />
         )}
 
@@ -79,12 +90,14 @@ class CombatantPanel extends React.Component {
             context = {this.props.context}
             weaponLevels = {this.props.skillLevels.weapons}
             key = {i} 
+            gems = {this.props.gems}
+            specialAttack = {this.props.specialAttack}
           />
         )}
 
         <ArmorSkill 
           armor = {this.props.armor}
-          armorSlot = {this.props.armorSlots}
+          armorSlots = {this.props.armorSlots}
         />
 
         <div className="gemWrapper">
@@ -92,7 +105,8 @@ class CombatantPanel extends React.Component {
             <Gems 
               gem = {{[f]:this.props.gems[f]}} //es6 feature...what is it called?
               context = {this.props.context}
-            key={f}/>
+              key={f}
+            />
           )}
         </div>
       </div>

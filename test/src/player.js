@@ -1,4 +1,4 @@
-import rando from './helpers.js';
+import randa from './helpers.js';
 
 export function getName(sex) {
   const boy = [
@@ -56,5 +56,5 @@ export function getName(sex) {
     "Yysara",
     "Zephale"
   ];
-  return (sex === 'boy') ? rando(boy) : rando (girl);
+  return (sex === 'boy') ? randa(boy) : randa (girl);
 }

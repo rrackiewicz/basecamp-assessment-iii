@@ -24,7 +24,7 @@ class Field extends React.Component {
     }
 
     return (
-          <span className={cname}>{this.props.prefix}{getVal()}</span>
+          <div className={cname}>{this.props.prefix}{getVal()}</div>
     )
   }
 }

@@ -1,5 +1,9 @@
-export function rando(arr) {
+export function randa(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
+}
+
+export function randn(num) {
+  return Math.floor(Math.random() * num);
 }
 
 export function slugify(text) {
@@ -18,6 +22,6 @@ export function arena(pp, mp) {
   return graph;
 }
 
-export default rando;
+export default randa;
 
 

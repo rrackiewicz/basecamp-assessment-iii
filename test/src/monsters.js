@@ -8,10 +8,7 @@ export function getMonster(index) {
         {left: 'claws'}
       ],
       skillLevels: {
-        weapons: {
-          claws: {
-            level: 1
-          }
+        weapons: { claws: {level: 1} //ick
         },
         armor: {},
         other: {}
@@ -20,7 +17,9 @@ export function getMonster(index) {
       buffs: [],
       debuffs: [],
       armor: 'fur',
-      armorSlots: [],
+      armorSlots: [
+        {color: ''}
+      ],
       stats: {
         baseHealth: 10,
         health: 10, 

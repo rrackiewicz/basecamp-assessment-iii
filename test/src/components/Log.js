@@ -2,15 +2,24 @@ import React from 'react';
 
 class Log extends React.Component {
 
-  render() {  
+  render() {
+    let cname = 'alert';
+    const mType = this.props.mType;
+
+    switch (mType) {
+      case 'buff':
+        cname += ' alert-success'
+      break;
+      case 'debuff' :
+        cname += ' alert-danger'
+      break;
+      default:
+        cname += ' alert-secondary'
+    }
+  
     return (
-      <div 
-        className="log rounded" 
-        style={(this.props.align === 'left') ? {float: 'left'} : {float: 'right'}}
-      >
-        <div className="alert alert-success" role="alert">
-          This is a success alert—check it out!
-        </div>
+      <div className={cname} role="alert">
+        {this.props.message}
       </div>
     )
   }

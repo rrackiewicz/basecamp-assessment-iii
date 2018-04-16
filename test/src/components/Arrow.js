@@ -6,7 +6,7 @@ class Arrow extends React.Component {
 
     return (
       <div onClick={() => this.props.toggleOpen()}>
-        <span className={this.props.isOpen ? 'fas fa-caret-up fa-lg': 'fas fa-caret-right fa-lg'}></span>
+        <span className={this.props.isOpen ? 'fas fa-caret-down fa-lg inline': 'fas fa-caret-right fa-lg inline'}></span>&nbsp;
       </div>
       
     )

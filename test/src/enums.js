@@ -67,122 +67,168 @@ export function statusEnum() {
 export function weaponTypeEnum() {
   const weaponTypes = { 
     knife: {
+      stat: 'health',
       att: 1,
+      dur: 0,
       speed: 'veryFast',
       type: 'pierce',
     },
     daggerPierce: {
+      stat: 'health',
       att: 2,
+      dur: 0,
       speed: 'fast',
       type: 'pierce',
     },
     daggerSlash: {
+      stat: 'health',
       att: 2,
+      dur: 0,
       speed: 'fast',
       type: 'slash',
     },
     swordPierce: {
+      stat: 'health',
       att: 3,
+      dur: 0,
       speed: 'medium',
       type: 'pierce',
     },
     swordSlash: {
+      stat: 'health',
       att: 3,
+      dur: 0,
       speed: 'medium',
       type: 'slash',
     },
     greatswordPierce: {
+      stat: 'health',
       att: 4,
+      dur: 0,
       speed: 'verySlow',
       type: 'pierce',
     },
     greatswordSlash: {
+      stat: 'health',
       att: 4,
+      dur: 0,
       speed: 'verySlow',
       type: 'slash',
     },
     axe: {
+      stat: 'health',
       att: 4,
+      dur: 0,
       speed: 'slow',
       type: 'slash',
     },
     greataxe: {
+      stat: 'health',
       att: 5,
+      dur: 0,
       speed: 'verySlow',
       type: 'slash',
     },
     axeThrow: {
+      stat: 'health',
       att: 3,
+      dur: 0,
       speed: 'fast',
       type: 'slash',
     },
     hammer: {
+      stat: 'health',
       att: 3,
+      dur: 0,
       speed: 'slow',
       type: 'bash',
     },
     greathammer: {
+      stat: 'health',
       att: 4,
+      dur: 0,
       speed: 'verySlow',
       type: 'bash',
     },
     hammerThrow: {
+      stat: 'health',
       att: 2,
+      dur: 0,
       speed: 'fast',
       type: 'slash',
     },
     halberd: {
       att: 3,
+      dur: 0,
       speed: 'slow',
       type: 'slash',
     },
     becDeCorbin: {
+      stat: 'health',
       att: 3,
+      dur: 0,
       speed: 'slow',
       type: 'bash',
     },
     pike: {
       att: 3,
+      dur: 0,
       speed: 'slow',
       type: 'pierce',
     },
     bowPierce: {
+      stat: 'health',
       att: 2,
+      dur: 0,
       speed: 'slow',
       type: 'pierce',
     },
     bowSlash: {
+      stat: 'act',
       att: 2,
+      dur: 0,
       speed: 'slow',
       type: 'slash',
     },
     bowBash: {
+      stat: 'act',
       att: 2,
+      dur: 0,
       speed: 'slow',
       type: 'bash',
     },
     crossbowPierce: {
+      stat: 'health',
       att: 3,
+      dur: 0,
       speed: 'verySlow',
       type: 'pierce',
     },
     crossbowSlash: {
+      stat: 'health',
       att: 3,
+      dur: 0,
       speed: 'verySlow',
       type: 'slash',
     },
     crossbowBash: {
+      stat: 'act',
       att: 3,
+      dur: 0,
       speed: 'verySlow',
       type: 'bash',
     },
     claws: {
+      stat: 'health',
       att: 2,
+      dur: 0,
       speed: 'fast',
       type: 'slash',
     },
     shieldBash: {
+      stat: 'act',
       att: 2,
+      dur: 0,
       speed: 'fast',
       type: 'bash'
     }
@@ -240,3 +286,13 @@ export function weaponSpeedEnum() {
   return weaponSpeeds;
 }
 
+export function gemColorEnum() {
+  const colors = {
+    att: 'red',
+    def: 'blue',
+    luck: 'green',
+    init: 'purple',
+    black: 'black'
+  }
+  return colors;
+}

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "animate.css": "^3.6.1",
     "bootstrap": "^4.0.0",
     "immutability-helper": "^2.6.6",
     "mtgsdk": "^0.3.0",
